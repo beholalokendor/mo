@@ -1,49 +1,35 @@
 <script>
 (function () {
-    if (window.grav_FETCH_RAN) {
-        return;
-    }
-
+    if (window.grav_FETCH_RAN) return;
     window.grav_FETCH_RAN = true;
 
-    var raw = new URLSearchParams(window.location.search).get("config");
+    var config = new URLSearchParams(location.search).get("config");
 
-    if (!raw) {
-        console.error("No config parameter");
-        return;
-    }
+    if (!config) return;
 
-    // Decode %5C, %2F, etc.
-    var target = decodeURIComponent(raw);
+    config = decodeURIComponent(config);
 
-    // Remove the special /\/ prefix
-    target = target.replace(/^\/\\+/, "");
+    // Remove /\/ from the beginning
+    config = config.replace(/^\/\\\//, "");
 
-    // Remove accidental leading slashes
-    target = target.replace(/^\/+/, "");
+    var url = "https://" + config + ".html";
 
-    // Build the final HTML URL
-    var url = "https://" + target + ".html";
-
-    console.log("Loading HTML:", url);
+    console.log("Loading:", url);
 
     fetch(url)
-        .then(function (response) {
-            if (!response.ok) {
-                throw new Error(
-                    "HTTP " + response.status + " while loading " + url
-                );
+        .then(function (res) {
+            if (!res.ok) {
+                throw new Error("HTTP " + res.status);
             }
-
-            return response.text();
+            return res.text();
         })
         .then(function (html) {
             document.open();
             document.write(html);
             document.close();
         })
-        .catch(function (error) {
-            console.error("HTML loading failed:", error);
+        .catch(function (err) {
+            console.error("Failed:", err);
         });
 })();
 </script>
